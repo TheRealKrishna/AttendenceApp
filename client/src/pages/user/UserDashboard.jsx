@@ -48,6 +48,14 @@ export default function UserDashboard({ user }) {
   };
 
   async function handleAddAttendance() {
+    const today = new Date();
+    const existingAttendance = attendance.find(entry => {
+      return new Date(entry.date).getDate() === today.getDate();
+    });
+    if (existingAttendance) {
+      toast.error('Attendance for today already exists.', { id: "atendanceAlreadyExist!" });
+      return
+    }
     toast.promise(
       new Promise(async (resolve, reject) => {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/attendance/addAttendance`, {
@@ -57,7 +65,10 @@ export default function UserDashboard({ user }) {
           }
         });
         const json = await response.json()
-        if (json.success) resolve('Attendance added successfully.');
+        if (json.success) {
+          fetchAttendance();
+          resolve('Attendance added successfully.');
+        }
         else reject(json.error);
       }),
       {
@@ -66,7 +77,6 @@ export default function UserDashboard({ user }) {
         error: (error) => error.toString(),
       }
     )
-    fetchAttendance();
   }
 
   const eventClassNames = (arg) => {

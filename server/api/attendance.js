@@ -38,7 +38,7 @@ app.post("/getAttendance", async (req, res) => {
       currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    return res.json({ success: true, attendance: attendance, user:user });
+    return res.json({ success: true, attendance: attendance, user: user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, error: "An internal server error occurred." });
@@ -86,7 +86,7 @@ app.post("/getAttendanceById", async (req, res) => {
       currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    return res.json({ success: true, attendance: attendance, user:user });
+    return res.json({ success: true, attendance: attendance, user: user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, error: "An internal server error occurred." });
