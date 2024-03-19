@@ -7,91 +7,61 @@ const jwt = require("jsonwebtoken")
 app.post("/getAttendance", async (req, res) => {
   try {
     const userId = jwt.verify(req.headers["auth-token"], process.env.JWT_SECRET);
-    let user = await User.findOne({ _id: userId._id }).select('-password');
-    if (!user) {
-      return res.status(400).json({ success: false, error: 'Your session has expired!' });
-    }
+    const user = await User.findOne({ _id: userId._id }).select('-password');
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    if (!user) return res.status(400).json({ success: false, error: 'Your session has expired!' });
 
-    const attendance = [];
-    const joinDate = user.registerDate;
-    let currentDate = new Date(joinDate);
+    const today = new Date().setHours(0, 0, 0, 0);
+    const attendance = user.attendance.map(entry => ({ date: new Date(entry.date).toISOString().split('T')[0], title: "present" }));
 
-    const userAttendance = user.attendance.map(entry => {
-      const dateISOString = new Date(entry.date).toISOString();
-      return { date: dateISOString.split('T')[0], title: "present" }
-    });
-
-    attendance.push(...userAttendance)
-
+    let currentDate = new Date(user.registerDate);
     while (currentDate <= today) {
-      const attendanceEntry = user.attendance.find(entry => entry.date.getTime() === currentDate.getTime());
-      if (!attendanceEntry) {
-        const dateISOString = new Date(currentDate).toISOString();
-        const datePart = dateISOString.split('T')[0];
-        if (!userAttendance.some(entry => entry.date === datePart)) {
-          attendance.push({ date: datePart, title: "absent" });
-        }
+      const datePart = new Date(currentDate).toISOString().split('T')[0];
+      if (!user.attendance.some(entry => new Date(entry.date).toISOString().split('T')[0] === datePart)) {
+        attendance.push({ date: datePart, title: "absent" });
       }
       currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    return res.json({ success: true, attendance: attendance, user: user });
+    return res.json({ success: true, attendance, user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, error: "An internal server error occurred." });
   }
 });
+
 
 
 app.post("/getAttendanceById", async (req, res) => {
   try {
     const adminId = jwt.verify(req.headers["auth-token"], process.env.JWT_SECRET);
     let admin = await User.findOne({ _id: adminId._id }).select('-password');
-    if (!admin) {
-      return res.status(400).json({ success: false, error: 'Your session has expired!' });
+
+    if (!admin || !admin.admin) {
+      return res.status(400).json({ success: false, error: admin ? 'Unauthorized Access!' : 'Your session has expired!' });
     }
 
-    if (!admin.admin) {
-      return res.status(400).json({ success: false, error: 'Unauthorized Access!' });
-    }
+    const user = await User.findOne({ _id: req.body.id }).select('-password');
 
-    let user = await User.findOne({ _id: req.body.id }).select('-password');
+    const today = new Date().setHours(0, 0, 0, 0);
+    const attendance = user.attendance.map(entry => ({ date: new Date(entry.date).toISOString().split('T')[0], title: "present" }));
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const attendance = [];
-    const joinDate = user.registerDate;
-    let currentDate = new Date(joinDate);
-
-    const userAttendance = user.attendance.map(entry => {
-      const dateISOString = new Date(entry.date).toISOString();
-      return { date: dateISOString.split('T')[0], title: "present" }
-    });
-
-    attendance.push(...userAttendance)
-
+    let currentDate = new Date(user.registerDate);
     while (currentDate <= today) {
-      const attendanceEntry = user.attendance.find(entry => entry.date.getTime() === currentDate.getTime());
-      if (!attendanceEntry) {
-        const dateISOString = new Date(currentDate).toISOString();
-        const datePart = dateISOString.split('T')[0];
-        if (!userAttendance.some(entry => entry.date === datePart)) {
-          attendance.push({ date: datePart, title: "absent" });
-        }
+      const datePart = new Date(currentDate).toISOString().split('T')[0];
+      if (!user.attendance.some(entry => new Date(entry.date).toISOString().split('T')[0] === datePart)) {
+        attendance.push({ date: datePart, title: "absent" });
       }
       currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    return res.json({ success: true, attendance: attendance, user: user });
+    return res.json({ success: true, attendance, user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, error: "An internal server error occurred." });
   }
 });
+
 
 
 app.post("/addAttendance", async (req, res) => {
