@@ -36,38 +36,45 @@
   </ul>
 
   <h2>Installation</h2>
-  <ol>
-    <li>Clone the repository:</li>
-    <code>git clone https://github.com/your-username/attendance-app.git</code>
-    
-    <li>Navigate to the project directory:</li>
-    <code>cd attendance-app</code>
-    
-    <li>Install dependencies for the server:</li>
-    <code>cd server && npm install</code>
-    
-    <li>Install dependencies for the client:</li>
-    <code>cd ../client && npm install</code>
-    
-    <li>Create a <code>.env</code> file in the <code>server</code> directory and provide the necessary environment variables:</li>
-    <pre>
+<ol>
+  <li>Clone the repository:</li>
+  <code>git clone https://github.com/your-username/attendance-app.git</code>
+
+  <li>Navigate to the project directory:</li>
+  <code>cd attendance-app</code>
+
+  <li>Install dependencies for the server:</li>
+  <pre>
+cd server
+npm install
+  </pre>
+
+  <li>Install dependencies for the client:</li>
+  <pre>
+cd ../client
+npm install
+  </pre>
+
+  <li>Create a <code>.env</code> file in the <code>server</code> directory and provide the necessary environment variables:</li>
+  <pre>
 JWT_SECRET=your_jwt_secret_here
 MONGO_URI=your_mongodb_uri_here
-    </pre>
-    
-    <li>Create a <code>.env</code> file in the <code>client</code> directory and provide the necessary environment variable:</li>
-    <pre>
+  </pre>
+
+  <li>Create a <code>.env</code> file in the <code>client</code> directory and provide the necessary environment variable:</li>
+  <pre>
 REACT_APP_BACKEND_URL=your_backend_url_here
-    </pre>
-    
-    <li>Start the backend server:</li>
-    <code>cd ../server && npm start</code>
-    
-    <li>Start the frontend development server:</li>
-    <code>cd ../client && npm start</code>
-    
-    <li>Access the application at <code>http://localhost:3000</code> in your web browser.</li>
-  </ol>
+  </pre>
+
+  <li>Start the backend server:</li>
+  <code>cd ../server && npm start</code>
+
+  <li>Start the frontend development server:</li>
+  <code>cd ../client && npm start</code>
+
+  <li>Access the application at <code>http://localhost:3000</code> in your web browser.</li>
+</ol>
+
 
   <h2>Contributing</h2>
   <p>Contributions are welcome! Feel free to open issues and pull requests for bug fixes, improvements, or new features.</p>
