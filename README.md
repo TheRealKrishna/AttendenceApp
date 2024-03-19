@@ -67,7 +67,7 @@ REACT_APP_BACKEND_URL=your_backend_url_here
   </pre>
 
   <li>Start the backend server:</li>
-  <code>cd ../server && npm start</code>
+  <code>cd ../server && node index.js</code>
 
   <li>Start the frontend development server:</li>
   <code>cd ../client && npm start</code>
