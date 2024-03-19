@@ -1,0 +1,39 @@
+{
+  "restoreTerminals.terminals": [
+    {
+      "splitTerminals": [
+        {
+          "name": "React",
+          "commands": [
+            "cd client"
+          ],
+        },
+        {
+          "name": "Node.js",
+          "commands": [
+            "cd server"
+          ]
+        }
+      ]
+    },
+    {
+      "splitTerminals": [
+        {
+          "name": "React",
+          "commands": [
+            "cd client",
+            "npm start"
+          ],
+        },
+        {
+          "name": "Node.js",
+          "commands": [
+            "cd server",
+            "nodemon"
+          ]
+        }
+      ]
+    }
+  ],
+  "git.ignoreLimitWarning": true
+}
