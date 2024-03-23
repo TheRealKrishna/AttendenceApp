@@ -47,6 +47,7 @@ export default function AdminDashboard({ user }) {
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th>Registered On</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -55,6 +56,7 @@ export default function AdminDashboard({ user }) {
               <tr key={user._id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{new Date(user.registerDate).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })}</td>
                 <td>
                   <Link to={`/admin/userAttendance/${user._id}`}><Button variant="primary">View Attendance</Button></Link>
                 </td>
