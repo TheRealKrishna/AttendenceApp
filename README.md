@@ -46,8 +46,7 @@
   <li>Install dependencies for the server:</li>
   <pre>
 cd server
-npm install
-  </pre>
+npm install</pre>
 
   <li>Install dependencies for the client:</li>
   <pre>
