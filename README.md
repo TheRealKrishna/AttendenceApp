@@ -51,26 +51,21 @@ npm install</pre>
   <li>Install dependencies for the client:</li>
   <pre>
 cd ../client
-npm install
-  </pre>
+npm install</pre>
 
   <li>Create a <code>.env</code> file in the <code>server</code> directory and provide the necessary environment variables:</li>
   <pre>
 JWT_SECRET=your_jwt_secret_here
-MONGO_URI=your_mongodb_uri_here
-  </pre>
+MONGO_URI=your_mongodb_uri_here</pre>
 
   <li>Create a <code>.env</code> file in the <code>client</code> directory and provide the necessary environment variable:</li>
   <pre>
-REACT_APP_BACKEND_URL=your_backend_url_here
-  </pre>
+REACT_APP_BACKEND_URL=your_backend_url_here</pre>
 
   <li>Start the backend server:</li>
   <code>cd ../server && node index.js</code>
-
   <li>Start the frontend development server:</li>
   <code>cd ../client && npm start</code>
-
   <li>Access the application at <code>http://localhost:3000</code> in your web browser.</li>
 </ol>
 
