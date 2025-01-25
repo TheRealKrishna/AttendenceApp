@@ -31,7 +31,7 @@ function Login() {
       try {
         toast.promise(
           new Promise(async (resolve, reject) => {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'

@@ -19,7 +19,7 @@ export default function UserDashboard({ user }) {
   const fetchAttendance = async () => {
     try {
       const token = sessionStorage.getItem('auth-token');
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/attendance/getAttendance`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/attendance/getAttendance`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default function UserDashboard({ user }) {
     }
     toast.promise(
       new Promise(async (resolve, reject) => {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/attendance/addAttendance`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/attendance/addAttendance`, {
           method: 'POST',
           headers: {
             'auth-token': sessionStorage.getItem("auth-token")

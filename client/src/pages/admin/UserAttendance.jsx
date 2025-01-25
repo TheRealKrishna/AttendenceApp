@@ -22,7 +22,7 @@ export default function UserAttendance() {
   const fetchAttendance = async () => {
     try {
       const token = sessionStorage.getItem('auth-token');
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/attendance/getAttendanceById`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/attendance/getAttendanceById`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -11,10 +11,10 @@ app.use(cors());
 process.env.TZ = 'Asia/Kolkata'
 
 
-app.use("/api/auth", require("./api/auth.js"))
-app.use("/api/attendance", require("./api/attendance.js"))
+app.use("/auth", require("./api/auth.js"))
+app.use("/attendance", require("./api/attendance.js"))
 
-app.get("/api", (req, res)=>{
+app.get("/", (req, res)=>{
   return res.send("Backend for attendance app...")
 })
 

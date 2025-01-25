@@ -15,7 +15,7 @@ export default function AdminDashboard({ user }) {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllUser`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/getAllUser`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

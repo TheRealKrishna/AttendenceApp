@@ -19,7 +19,7 @@ function App() {
     const fetchData = async () => {
       try {
         const token = sessionStorage.getItem('auth-token');
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getUser`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/getUser`, {
           headers: { 'auth-token': token },
           method: "POST"
         });
